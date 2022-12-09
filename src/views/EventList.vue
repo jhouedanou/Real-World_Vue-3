@@ -6,9 +6,8 @@
 </template>
 
 <script>
-  import axios from 'axios'
-
-// @ is an alias to /src
+  import EventService from '@/services/EventService.js'
+ // @ is an alias to /src
 import EventCard from '@/components/EventCard.vue'
 export default {
   name: 'Home',
@@ -21,7 +20,13 @@ export default {
     }
   },
   created(){
-
+   EventService.getEvents()
+    .then(response=> {
+      this.events = response.data
+    })
+    .catch(error=> {
+      console.log(error)
+    })
   }
 }
 </script>
